@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { Navigation } from "@/components/navigation"
+import { SmoothScrollProvider } from "@/components/parallax-section"
 import "./globals.css"
 
 const _geist = Geist({ subsets: ["latin"] })
@@ -39,9 +40,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-sans antialiased`}>
-        <Navigation />
-        <main className="pt-16 pb-20 md:pb-8 min-h-screen">{children}</main>
-        <Analytics />
+        <SmoothScrollProvider>
+          <Navigation />
+          <main className="min-h-screen">{children}</main>
+          <Analytics />
+        </SmoothScrollProvider>
       </body>
     </html>
   )
