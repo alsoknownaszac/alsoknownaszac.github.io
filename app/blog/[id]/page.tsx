@@ -1,7 +1,4 @@
-"use client"
-
 import { notFound } from "next/navigation"
-import { motion } from "framer-motion"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -10,13 +7,13 @@ import { Separator } from "@/components/ui/separator"
 import { ArrowLeft, Calendar, Clock, Share2 } from "lucide-react"
 import { blogPosts } from "@/lib/blog-data"
 
-export default function BlogPostPage({ params }: { params: { id: string } }) {
-  const post = blogPosts.find((p) => p.id === params.id)
+export async function generateStaticParams() {
+  return blogPosts.map((post) => ({
+    id: post.id,
+  }))
+}
 
-  if (!post) {
-    notFound()
-  }
-
+function ShareButton({ post }: { post: any }) {
   const handleShare = async () => {
     if (navigator.share) {
       try {
@@ -35,13 +32,23 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
   }
 
   return (
+    <Button onClick={handleShare} variant="outline" size="sm" className="gap-2 bg-transparent">
+      <Share2 className="w-4 h-4" />
+      Share
+    </Button>
+  )
+}
+
+export default function BlogPostPage({ params }: { params: { id: string } }) {
+  const post = blogPosts.find((p) => p.id === params.id)
+
+  if (!post) {
+    notFound()
+  }
+
+  return (
     <div className="container mx-auto px-4 py-12">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="max-w-4xl mx-auto"
-      >
+      <div className="max-w-4xl mx-auto">
         <Button asChild variant="ghost" className="mb-6">
           <Link href="/blog">
             <ArrowLeft className="w-4 h-4 mr-2" />
@@ -78,10 +85,6 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
                 </Badge>
               ))}
             </div>
-            <Button onClick={handleShare} variant="outline" size="sm" className="gap-2 bg-transparent">
-              <Share2 className="w-4 h-4" />
-              Share
-            </Button>
           </header>
 
           <Separator className="mb-8" />
@@ -104,7 +107,7 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
 
         <Separator className="my-12" />
 
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.3 }}>
+        <div>
           <Card className="p-8 bg-gradient-to-br from-primary/5 to-secondary/5 border-primary/20">
             <h3 className="text-2xl font-bold mb-4">Enjoyed this article?</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
@@ -114,8 +117,8 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
               <Link href="/blog">Read More Articles</Link>
             </Button>
           </Card>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </div>
   )
 }

@@ -1,7 +1,4 @@
-"use client"
-
 import { notFound } from "next/navigation"
-import { motion } from "framer-motion"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -9,10 +6,14 @@ import { Card } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { ArrowLeft, ExternalLink, Github, Target, Lightbulb, TrendingUp } from "lucide-react"
 import { projects } from "@/lib/projects-data"
-import { use } from "react"
 
-export default function ProjectDetailPage(props: { params: Promise<{ id: string }> }) {
-  const params = use(props.params)
+export async function generateStaticParams() {
+  return projects.map((project) => ({
+    id: project.id,
+  }))
+}
+
+export default function ProjectDetailPage({ params }: { params: { id: string } }) {
   const project = projects.find((p) => p.id === params.id)
 
   if (!project) {
@@ -21,12 +22,7 @@ export default function ProjectDetailPage(props: { params: Promise<{ id: string 
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="max-w-6xl mx-auto"
-      >
+      <div className="max-w-6xl mx-auto">
         <Button asChild variant="ghost" className="mb-6">
           <Link href="/projects">
             <ArrowLeft className="w-4 h-4 mr-2" />
@@ -131,7 +127,7 @@ export default function ProjectDetailPage(props: { params: Promise<{ id: string 
 
         <Separator className="my-12" />
 
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.3 }}>
+        <div>
           <Card className="p-8 bg-gradient-to-br from-primary/5 to-secondary/5 border-primary/20">
             <h3 className="text-2xl font-bold mb-4">Interested in working together?</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
@@ -141,8 +137,8 @@ export default function ProjectDetailPage(props: { params: Promise<{ id: string 
               <Link href="/contact">Get in Touch</Link>
             </Button>
           </Card>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </div>
   )
 }
