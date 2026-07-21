@@ -1,27 +1,33 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import type { ReactNode } from "react"
+import { motion } from "framer-motion";
+import type { ReactNode } from "react";
 
 interface SectionHeaderProps {
-  title: string
-  subtitle?: string
-  icon?: ReactNode
+  title?: string;
+  subtitle?: string;
+  icon?: ReactNode;
 }
 
 export function SectionHeader({ title, subtitle, icon }: SectionHeaderProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.4 }}
       className="mb-12"
     >
-      <div className="flex items-center gap-3 mb-3">
-        {icon && <div className="text-primary">{icon}</div>}
-        <h1 className="text-4xl md:text-5xl font-bold text-balance">{title}</h1>
-      </div>
-      {subtitle && <p className="text-lg text-muted-foreground text-pretty max-w-2xl">{subtitle}</p>}
+      {icon && <div className="text-muted-foreground mb-3">{icon}</div>}
+      {title && (
+        <h1 className="text-3xl md:text-4xl font-semibold text-balance tracking-tight mb-3">
+          {title}
+        </h1>
+      )}
+      {subtitle && (
+        <p className="text-sm md:text-base text-muted-foreground/60 text-pretty max-w-xl leading-relaxed">
+          {subtitle}
+        </p>
+      )}
     </motion.div>
-  )
+  );
 }

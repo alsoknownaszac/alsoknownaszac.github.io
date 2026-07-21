@@ -1,132 +1,115 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { motion } from "framer-motion"
-import Link from "next/link"
-import { SectionHeader } from "@/components/section-header"
-import { Card } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Briefcase, ExternalLink, Github, ArrowRight } from "lucide-react"
-import { projects } from "@/lib/projects-data"
-
-const categories = ["All", "Web App", "Mobile", "AI/ML", "SaaS", "E-Commerce", "Tools"] as const
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { PageWrapper } from "@/components/page-wrapper";
+import { SectionHeader } from "@/components/section-header";
+import { Briefcase, ArrowRight, ExternalLink, Github } from "lucide-react";
+import { projects } from "@/lib/projects-data";
 
 export default function ProjectsPage() {
-  const [selectedCategory, setSelectedCategory] = useState<(typeof categories)[number]>("All")
-
-  const filteredProjects =
-    selectedCategory === "All" ? projects : projects.filter((p) => p.categories.includes(selectedCategory))
-
   return (
-    <div className="container mx-auto px-4 py-12">
-      <SectionHeader
-        icon={<Briefcase className="w-10 h-10" />}
-        title="Projects"
-        subtitle="A showcase of products I've built, shipped, and contributed to. Each project represents real problems solved with thoughtful engineering."
-      />
+    <PageWrapper>
+      <div className="container mx-auto px-4 py-12">
+        <section>
+          <div className="max-w-3xl mx-auto">
+            <p className="font-mono text-sm text-muted-foreground/60 mb-12 leading-relaxed">
+              A selection of projects I've built — from fintech platforms to
+              healthcare systems and everything in between.
+            </p>
+          </div>
+          <div className="max-w-3xl mx-auto flex flex-col">
+            {projects.map((project, i) => (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.05 * i }}
+                viewport={{ once: true }}
+                className="group border-t border-border hover:border-foreground/15 transition-colors duration-300"
+              >
+                <div className="py-8 md:py-10">
+                  {/* Top row: numbering + role */}
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-xs font-mono text-muted-foreground/40 tabular-nums">
+                      {String(i + 1).padStart(2, "0")} /{" "}
+                      {String(projects.length).padStart(2, "0")}
+                    </span>
+                    <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-widest">
+                      {project.role}
+                    </span>
+                  </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        className="mb-8"
-      >
-        <div className="flex flex-wrap gap-2">
-          {categories.map((category) => (
-            <Button
-              key={category}
-              variant={selectedCategory === category ? "default" : "outline"}
-              onClick={() => setSelectedCategory(category)}
-              size="sm"
-            >
-              {category}
-            </Button>
-          ))}
-        </div>
-      </motion.div>
-
-      <div className="space-y-8">
-        {filteredProjects.map((project, index) => (
-          <motion.div
-            key={project.id}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 * index }}
-          >
-            <Card className="overflow-hidden hover:border-primary/50 transition-all duration-300 group">
-              <div className="grid md:grid-cols-2 gap-0">
-                <div className="relative aspect-video md:aspect-auto overflow-hidden bg-muted">
-                  <img
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  {project.featured && (
-                    <Badge className="absolute top-4 left-4 bg-primary text-primary-foreground">Featured</Badge>
-                  )}
-                </div>
-
-                <div className="p-6 md:p-8 flex flex-col">
-                  <div className="mb-4">
-                    <h3 className="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">
+                  {/* Title + tagline */}
+                  <Link href={`/projects/${project.id}/`} className="block">
+                    <h3 className="text-xl md:text-2xl font-semibold tracking-tight text-foreground group-hover:text-muted-foreground transition-colors mb-2 leading-tight">
                       {project.title}
                     </h3>
-                    <p className="text-muted-foreground font-medium">{project.tagline}</p>
-                  </div>
-
-                  <p className="text-muted-foreground text-sm mb-4 leading-relaxed">{project.description}</p>
-
-                  <div className="mb-4">
-                    <p className="text-xs text-muted-foreground mb-2">
-                      <span className="font-semibold">Role:</span> {project.role}
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-4 max-w-xl">
+                      {project.tagline}
                     </p>
-                  </div>
+                  </Link>
 
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.tech.map((tech) => (
-                      <Badge key={tech} variant="secondary" className="text-xs">
-                        {tech}
-                      </Badge>
+                  {/* Description */}
+                  <p className="text-sm text-muted-foreground/70 leading-relaxed mb-5 line-clamp-3 max-w-xl">
+                    {project.description}
+                  </p>
+
+                  {/* Tech tags */}
+                  <div className="flex flex-wrap gap-1.5 mb-5">
+                    {project.tech.slice(0, 5).map((t) => (
+                      <span
+                        key={t}
+                        className="text-[11px] text-muted-foreground/60 px-2 py-0.5 border border-border/30"
+                      >
+                        {t}
+                      </span>
                     ))}
+                    {project.tech.length > 5 && (
+                      <span className="text-[11px] text-muted-foreground/40 px-2 py-0.5">
+                        +{project.tech.length - 5} more
+                      </span>
+                    )}
                   </div>
 
-                  <div className="flex flex-wrap gap-3 mt-auto">
-                    <Button asChild size="sm" className="gap-2">
-                      <Link href={`/projects/${project.id}`}>
-                        View Details
-                        <ArrowRight className="w-4 h-4" />
-                      </Link>
-                    </Button>
+                  {/* Links */}
+                  <div className="flex flex-wrap items-center gap-4">
+                    <Link
+                      href={`/projects/${project.id}/`}
+                      className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-muted-foreground transition-colors"
+                    >
+                      Case study
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
                     {project.liveUrl && (
-                      <Button asChild size="sm" variant="outline" className="gap-2 bg-transparent">
-                        <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                          <ExternalLink className="w-4 h-4" />
-                          Live Demo
-                        </a>
-                      </Button>
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                        Live
+                      </a>
                     )}
                     {project.githubUrl && (
-                      <Button asChild size="sm" variant="outline" className="gap-2 bg-transparent">
-                        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                          <Github className="w-4 h-4" />
-                          Code
-                        </a>
-                      </Button>
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        <Github className="w-3.5 h-3.5" />
+                        Code
+                      </a>
                     )}
                   </div>
                 </div>
-              </div>
-            </Card>
-          </motion.div>
-        ))}
+              </motion.div>
+            ))}
+          </div>
+        </section>
       </div>
-
-      {filteredProjects.length === 0 && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-12">
-          <p className="text-muted-foreground">No projects found in this category.</p>
-        </motion.div>
-      )}
-    </div>
-  )
+    </PageWrapper>
+  );
 }

@@ -1,18 +1,21 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
-import { Analytics } from "@vercel/analytics/next"
-import { Navigation } from "@/components/navigation"
-import { SmoothScrollProvider } from "@/components/parallax-section"
-import "./globals.css"
+import type React from "react";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { Navigation } from "@/components/navigation";
+import "./globals.css";
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-inter",
+});
 
 export const metadata: Metadata = {
-  title: "Portfolio | Software Engineer Showcase",
-  description: "Modern portfolio showcasing software engineering projects, skills, and experience",
-  generator: "v0.app",
+  title: "Collins Amayo | Software Engineer",
+  description:
+    "Software Engineer building production-grade web applications across fintech, SaaS, healthcare, and digital commerce.",
   icons: {
     icon: [
       {
@@ -30,22 +33,20 @@ export const metadata: Metadata = {
     ],
     apple: "/apple-icon.png",
   },
-}
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`font-sans antialiased`}>
-        <SmoothScrollProvider>
-          <Navigation />
-          <main className="min-h-screen">{children}</main>
-          <Analytics />
-        </SmoothScrollProvider>
+    <html lang="en" className={inter.variable}>
+      <body className="font-sans antialiased">
+        <Navigation />
+        <main className="min-h-screen">{children}</main>
+        <Analytics />
       </body>
     </html>
-  )
+  );
 }

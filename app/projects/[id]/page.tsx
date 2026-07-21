@@ -1,144 +1,185 @@
-import { notFound } from "next/navigation"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Card } from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
-import { ArrowLeft, ExternalLink, Github, Target, Lightbulb, TrendingUp } from "lucide-react"
-import { projects } from "@/lib/projects-data"
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
+import { Badge } from "@/components/ui/badge";
+import { ArrowLeft, ExternalLink, Github } from "lucide-react";
+import { projects } from "@/lib/projects-data";
 
 export async function generateStaticParams() {
   return projects.map((project) => ({
     id: project.id,
-  }))
+  }));
 }
 
-export default function ProjectDetailPage({ params }: { params: { id: string } }) {
-  const project = projects.find((p) => p.id === params.id)
+export default function ProjectDetailPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const project = projects.find((p) => p.id === params.id);
 
   if (!project) {
-    notFound()
+    notFound();
   }
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <div className="max-w-6xl mx-auto">
-        <Button asChild variant="ghost" className="mb-6">
-          <Link href="/projects">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Projects
-          </Link>
-        </Button>
+      <div className="max-w-4xl mx-auto">
+        <Link
+          href="/projects"
+          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
+        >
+          <ArrowLeft className="w-3.5 h-3.5" />
+          Back to Projects
+        </Link>
 
-        <div className="mb-8">
-          {project.featured && <Badge className="mb-4 bg-primary text-primary-foreground">Featured Project</Badge>}
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-balance">{project.title}</h1>
-          <p className="text-xl text-muted-foreground mb-6">{project.tagline}</p>
+        <div className="mb-10">
+          {project.featured && (
+            <span className="inline-block px-2.5 py-0.5 bg-foreground text-background text-xs font-medium mb-4">
+              Featured Project
+            </span>
+          )}
+          <h1 className="text-3xl md:text-4xl font-semibold mb-3 text-balance tracking-tight">
+            {project.title}
+          </h1>
+          <p className="text-base text-muted-foreground mb-6">
+            {project.tagline}
+          </p>
           <div className="flex flex-wrap gap-3">
-            {project.liveUrl && (
-              <Button asChild size="lg" className="gap-2">
-                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="w-4 h-4" />
-                  View Live Demo
-                </a>
-              </Button>
-            )}
-            {project.githubUrl && (
-              <Button asChild size="lg" variant="outline" className="gap-2 bg-transparent">
-                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                  <Github className="w-4 h-4" />
-                  View Source Code
-                </a>
-              </Button>
-            )}
+            <a
+              href={project.liveUrl || "/404"}
+              target={project.liveUrl ? "_blank" : undefined}
+              rel={project.liveUrl ? "noopener noreferrer" : undefined}
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-foreground text-background text-sm font-medium hover:bg-foreground/90 transition-colors"
+            >
+              <ExternalLink className="w-3.5 h-3.5" />
+              Live Demo
+            </a>
+            <a
+              href={project.githubUrl || "/404"}
+              target={project.githubUrl ? "_blank" : undefined}
+              rel={project.githubUrl ? "noopener noreferrer" : undefined}
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 border border-border text-foreground text-sm font-medium hover:bg-muted transition-colors"
+            >
+              <Github className="w-3.5 h-3.5" />
+              Source Code
+            </a>
           </div>
         </div>
 
-        <div className="aspect-video overflow-hidden rounded-lg bg-muted mb-8">
-          <img src={project.image || "/placeholder.svg"} alt={project.title} className="w-full h-full object-cover" />
+        <div className="relative aspect-[16/9] overflow-hidden bg-muted mb-12">
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            sizes="100vw"
+            className="object-cover"
+            priority
+          />
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
-          <Card className="p-6">
-            <Target className="w-8 h-8 text-primary mb-3" />
-            <h3 className="font-bold mb-2">Problem</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">{project.problem}</p>
-          </Card>
-          <Card className="p-6">
-            <Lightbulb className="w-8 h-8 text-secondary mb-3" />
-            <h3 className="font-bold mb-2">Solution</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">{project.solution}</p>
-          </Card>
-          <Card className="p-6">
-            <TrendingUp className="w-8 h-8 text-primary mb-3" />
-            <h3 className="font-bold mb-2">Role</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">{project.role}</p>
-          </Card>
+        <div className="grid md:grid-cols-3 gap-6 mb-16">
+          <div className="p-6 border border-border">
+            <h3 className="text-sm font-semibold mb-2 uppercase tracking-wider text-muted-foreground">
+              Problem
+            </h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              {project.problem}
+            </p>
+          </div>
+          <div className="p-6 border border-border">
+            <h3 className="text-sm font-semibold mb-2 uppercase tracking-wider text-muted-foreground">
+              Solution
+            </h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              {project.solution}
+            </p>
+          </div>
+          <div className="p-6 border border-border">
+            <h3 className="text-sm font-semibold mb-2 uppercase tracking-wider text-muted-foreground">
+              Role
+            </h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              {project.role}
+            </p>
+          </div>
         </div>
 
-        <Separator className="my-12" />
-
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold mb-6">Impact & Results</h2>
-          <div className="grid md:grid-cols-2 gap-4">
+        <section className="mb-16">
+          <h2 className="text-xl font-semibold mb-6 tracking-tight">
+            Impact & Results
+          </h2>
+          <div className="space-y-3">
             {project.impact.map((item, index) => (
-              <Card key={index} className="p-6 bg-gradient-to-br from-primary/5 to-secondary/5 border-primary/20">
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-primary mt-2" />
-                  <p className="text-muted-foreground leading-relaxed">{item}</p>
-                </div>
-              </Card>
+              <div
+                key={index}
+                className="flex items-start gap-3 p-4 border border-border"
+              >
+                <span className="block w-1.5 h-1.5 mt-1.5 bg-foreground flex-shrink-0" />
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {item}
+                </p>
+              </div>
             ))}
           </div>
         </section>
 
-        <Separator className="my-12" />
-
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold mb-6">Technology Stack</h2>
-          <div className="flex flex-wrap gap-3">
+        <section className="mb-16">
+          <h2 className="text-xl font-semibold mb-6 tracking-tight">
+            Technology Stack
+          </h2>
+          <div className="flex flex-wrap gap-2">
             {project.tech.map((tech) => (
-              <Badge key={tech} variant="secondary" className="text-sm px-4 py-2">
+              <span
+                key={tech}
+                className="px-3 py-1.5 border border-border text-sm text-muted-foreground"
+              >
                 {tech}
-              </Badge>
+              </span>
             ))}
           </div>
         </section>
 
         {project.gallery.length > 0 && (
-          <>
-            <Separator className="my-12" />
-            <section className="mb-12">
-              <h2 className="text-3xl font-bold mb-6">Gallery</h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {project.gallery.map((image, index) => (
-                  <div key={index} className="aspect-video overflow-hidden rounded-lg bg-muted">
-                    <img
-                      src={image || "/placeholder.svg"}
-                      alt={`${project.title} screenshot ${index + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-            </section>
-          </>
+          <section className="mb-16">
+            <h2 className="text-xl font-semibold mb-6 tracking-tight">
+              Gallery
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {project.gallery.map((image, index) => (
+                <div
+                  key={index}
+                  className="relative aspect-video overflow-hidden bg-muted"
+                >
+                  <Image
+                    src={image}
+                    alt={`${project.title} screenshot ${index + 1}`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          </section>
         )}
 
-        <Separator className="my-12" />
-
-        <div>
-          <Card className="p-8 bg-gradient-to-br from-primary/5 to-secondary/5 border-primary/20">
-            <h3 className="text-2xl font-bold mb-4">Interested in working together?</h3>
-            <p className="text-muted-foreground mb-6 leading-relaxed">
-              I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
-            </p>
-            <Button asChild size="lg">
-              <Link href="/contact">Get in Touch</Link>
-            </Button>
-          </Card>
+        <div className="border border-border p-8 text-center">
+          <h3 className="text-lg font-semibold mb-2 tracking-tight">
+            Interested in working together?
+          </h3>
+          <p className="text-sm text-muted-foreground mb-6 leading-relaxed max-w-md mx-auto">
+            I'm always open to discussing new projects, creative ideas, or
+            opportunities.
+          </p>
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-1.5 px-6 py-2.5 bg-foreground text-background text-sm font-medium hover:bg-foreground/90 transition-colors"
+          >
+            Get in Touch
+          </Link>
         </div>
       </div>
     </div>
-  )
+  );
 }

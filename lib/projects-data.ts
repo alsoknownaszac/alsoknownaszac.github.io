@@ -1,139 +1,147 @@
 export interface Project {
-  id: string
-  title: string
-  tagline: string
-  description: string
-  problem: string
-  solution: string
-  impact: string[]
-  role: string
-  tech: string[]
-  categories: string[]
-  image: string
-  gallery: string[]
-  liveUrl?: string
-  githubUrl?: string
-  featured: boolean
+  id: string;
+  title: string;
+  tagline: string;
+  description: string;
+  problem: string;
+  solution: string;
+  impact: string[];
+  role: string;
+  tech: string[];
+  categories: string[];
+  image: string;
+  gallery: string[];
+  liveUrl?: string;
+  githubUrl?: string;
+  featured: boolean;
 }
 
 export const projects: Project[] = [
   {
-    id: "ecommerce-platform",
-    title: "E-Commerce Platform",
-    tagline: "Full-stack marketplace connecting buyers and sellers",
+    id: "loanmate",
+    title: "LoanMate",
+    tagline: "Multi-tenant loan management platform for lenders and borrowers",
     description:
-      "Built a scalable e-commerce platform with real-time inventory management, secure payment processing, and dynamic product recommendations.",
+      "A full-stack, multi-tenant SaaS platform for managing loans, borrowers, payments, and documents. Built with Next.js 15, TypeScript, Supabase, and Tailwind CSS — featuring dual authentication, automated payment schedules, document management, and live chat.",
     problem:
-      "Small businesses struggled to compete with large marketplaces due to high fees and limited customization options.",
+      "Small lending organizations manage operations with Excel spreadsheets and manual processes. Existing solutions are lender-first, heavy, expensive ($50K-$500K/yr), and provide terrible UX for borrowers.",
     solution:
-      "Created an affordable, fully-customizable platform with low transaction fees, integrated analytics, and seamless third-party integrations.",
+      "Built LoanMate as a lightweight, borrower-first experience layer. Features multi-tenant architecture with complete data isolation, dual authentication (admin/borrower), automated amortization schedules, Gmail SMTP with Resend fallback for 99%+ email delivery, and Row Level Security at the database level.",
     impact: [
-      "Onboarded 500+ sellers in first 6 months",
-      "Processed $2M+ in transactions",
-      "Achieved 98% uptime with zero data breaches",
-      "Reduced cart abandonment by 35% with optimized checkout",
+      "Designed for 1-day setup vs 6–12 months for enterprise solutions",
+      "Dual-provider email system for 99%+ delivery reliability",
+      "Multi-tenant architecture with PostgreSQL Row Level Security",
+      "Mobile-responsive across phones, tablets, and desktops",
+      "Custom UI components replacing all browser alerts for professional UX",
     ],
-    role: "Lead Full-Stack Engineer",
-    tech: ["Next.js", "PostgreSQL", "Stripe", "AWS S3", "Redis"],
-    categories: ["Web App", "E-Commerce", "Full-Stack"],
+    role: "Full-Stack Engineer",
+    tech: [
+      "Next.js 15",
+      "TypeScript",
+      "Supabase",
+      "Tailwind CSS",
+      "PostgreSQL",
+      "Shadcn/ui",
+    ],
+    categories: ["Web App", "SaaS", "Full-Stack"],
     image: "/modern-ecommerce-dashboard.png",
-    gallery: ["/ecommerce-product-listing.jpg", "/shopping-cart-interface.jpg", "/seller-dashboard-analytics.jpg"],
-    liveUrl: "https://example.com",
-    githubUrl: "https://github.com/yourusername/project",
+    gallery: [],
+    githubUrl: "https://github.com/stephaneK123/loan-mate-borrower-portal",
     featured: true,
   },
   {
-    id: "ai-content-generator",
-    title: "AI Content Generator",
-    tagline: "ML-powered tool for creating marketing copy",
+    id: "question-tracker",
+    title: "Question Tracker",
+    tagline: "Responsive web app to help students track their questions",
     description:
-      "Developed an AI-powered content generation tool that helps marketers create high-quality copy for ads, emails, and social media in seconds.",
+      "A question tracking application built for students, designed to be integrated into a WordPress site or hosted independently. Allows individuals to track, manage, and review their questions with a clean, responsive interface.",
     problem:
-      "Marketing teams spent hours brainstorming and writing copy, leading to bottlenecks and inconsistent brand voice.",
+      "Students lacked a dedicated tool to track and manage their questions across study sessions. Existing solutions were clunky or not integrated into their existing learning platforms.",
     solution:
-      "Built an AI assistant trained on brand guidelines that generates on-brand copy with customizable tone, style, and length.",
+      "Built a responsive web-based question tracker from the ground up — with Figma-designed wireframes, scrum-based development workflow, and integration-ready architecture that could work standalone or be embedded into a WordPress environment.",
     impact: [
-      "Reduced content creation time by 70%",
-      "Generated 100K+ pieces of copy for 500+ brands",
-      "Improved engagement rates by 25% on average",
-      "Achieved 4.8/5 user satisfaction rating",
+      "Designed collaboratively with 4-person engineering team",
+      "Built from Figma wireframes with iterative Scrum process",
+      "Delivered initial MVP version within tight timeline",
+      "Responsive design works across all devices",
     ],
-    role: "Product Engineer & AI Integration Lead",
-    tech: ["React", "Python", "OpenAI API", "FastAPI", "MongoDB"],
-    categories: ["AI/ML", "SaaS", "Productivity"],
-    image: "/ai-content-generation-interface.jpg",
-    gallery: ["/ai-writing-assistant.jpg", "/brand-voice-customization.jpg", "/content-variations-preview.jpg"],
-    liveUrl: "https://example.com",
-    featured: true,
-  },
-  {
-    id: "task-management-app",
-    title: "Task Management App",
-    tagline: "Collaborative workspace for distributed teams",
-    description:
-      "Created a real-time task management application with kanban boards, time tracking, and team collaboration features.",
-    problem:
-      "Remote teams lacked a unified platform that combined project management, communication, and time tracking.",
-    solution:
-      "Built an all-in-one workspace with real-time updates, integrations with popular tools, and insightful productivity analytics.",
-    impact: [
-      "Adopted by 200+ companies",
-      "Managed 1M+ tasks across teams",
-      "Improved team productivity by 40%",
-      "Reduced meetings by 30% with async collaboration",
-    ],
-    role: "Co-Founder & Lead Developer",
-    tech: ["TypeScript", "Node.js", "MongoDB", "WebSocket", "Docker"],
-    categories: ["Web App", "Productivity", "SaaS"],
+    role: "Frontend Developer",
+    tech: ["JavaScript", "HTML", "CSS", "Figma", "WordPress Integration"],
+    categories: ["Web App", "Education", "Tools"],
     image: "/project-management-kanban-board.png",
-    gallery: ["/task-board.png", "/team-collaboration-chat.jpg", "/productivity-analytics-dashboard.png"],
-    githubUrl: "https://github.com/yourusername/project",
+    gallery: [],
+    githubUrl: "https://github.com/Android-Battalion/Question-Tracker",
     featured: true,
   },
   {
-    id: "fitness-tracker",
-    title: "Fitness Tracker Mobile App",
-    tagline: "AI-powered personal fitness companion",
+    id: "clientbrief",
+    title: "ClientBrief",
+    tagline: "Streamlined client onboarding and project briefing tool",
     description:
-      "Mobile app that uses computer vision to track workouts, provide real-time form feedback, and generate personalized training plans.",
-    problem: "Home workouts lacked the guidance and accountability of in-person training.",
+      "A Next.js application designed to streamline the client onboarding process — capturing project requirements, automating briefs, and reducing back-and-forth communication between agencies and their clients.",
+    problem:
+      "Agencies and freelancers waste significant time in back-and-forth emails trying to gather project requirements from clients. The briefing process is fragmented, inconsistent, and error-prone.",
     solution:
-      "Leveraged device cameras and ML models to analyze exercise form and provide instant feedback, making quality training accessible.",
+      "Built a structured onboarding flow using Next.js App Router and TypeScript. Clients fill out guided briefs, agencies receive structured project requirements — reducing onboarding time and eliminating miscommunication.",
     impact: [
-      "Downloaded by 50K+ users",
-      "Averaged 4.6/5 star rating on app stores",
-      "Users reported 60% improvement in form",
-      "Featured in Apple App Store's Health & Fitness category",
-    ],
-    role: "Mobile Developer & ML Engineer",
-    tech: ["React Native", "TensorFlow Lite", "Firebase", "Python"],
-    categories: ["Mobile", "AI/ML", "Health"],
-    image: "/fitness-tracking-app.png",
-    gallery: ["/workout-form-analysis.jpg", "/training-plan-interface.jpg", "/progress-tracking-charts.jpg"],
-    liveUrl: "https://example.com",
-    featured: false,
-  },
-  {
-    id: "developer-portfolio",
-    title: "Developer Portfolio Builder",
-    tagline: "Create stunning portfolios in minutes",
-    description:
-      "A no-code platform for developers to create beautiful, customizable portfolios with pre-built templates and easy content management.",
-    problem: "Developers spent more time building their portfolio sites than showcasing their actual work.",
-    solution:
-      "Designed a drag-and-drop builder with developer-focused templates, GitHub integration, and one-click deployment.",
-    impact: [
-      "Used by 10K+ developers",
-      "Average portfolio creation time: 15 minutes",
-      "95% of users deployed within first session",
-      "Generated portfolios led to 300+ job offers",
+      "Streamlined client onboarding for digital agencies",
+      "Reduced briefing time with structured, guided forms",
+      "Built with Next.js App Router for optimal performance",
+      "Type-safe across the entire stack with TypeScript",
     ],
     role: "Solo Developer",
-    tech: ["Next.js", "Supabase", "Tailwind CSS", "Vercel"],
-    categories: ["Web App", "Tools", "Developer Tools"],
-    image: "/portfolio-builder-interface.jpg",
-    gallery: ["/template-selection.jpg", "/drag-and-drop-editor.jpg", "/github-integration.jpg"],
-    githubUrl: "https://github.com/yourusername/project",
-    featured: false,
+    tech: ["Next.js", "TypeScript", "Tailwind CSS", "React"],
+    categories: ["Web App", "SaaS", "Tools"],
+    image: "/ai-content-generation-interface.jpg",
+    gallery: [],
+    githubUrl: "https://github.com/alsoknownaszac/clientbrief",
+    featured: true,
   },
-]
+  {
+    id: "tendly",
+    title: "Tendly",
+    tagline: "Mobile-first community and event discovery app",
+    description:
+      "A React Native (Expo) mobile application focused on community building and event discovery. Built with file-based routing, smooth animations, and a clean mobile-native UI for discovering local happenings.",
+    problem:
+      "People struggle to discover local events and communities that match their interests. Existing platforms are cluttered with noise and lack a focused, clean mobile experience.",
+    solution:
+      "Built a mobile app using Expo and React Native with file-based routing, optimized for both iOS and Android. Features clean card-based event discovery, community joining flows, and intuitive navigation — making local discovery effortless.",
+    impact: [
+      "Cross-platform mobile app (iOS + Android) via Expo",
+      "File-based routing for clean navigation architecture",
+      "Optimized for mobile performance with React Native",
+    ],
+    role: "Mobile Developer",
+    tech: ["React Native", "Expo", "TypeScript", "JavaScript"],
+    categories: ["Mobile", "Community", "Social"],
+    image: "/fitness-tracking-app.png",
+    gallery: [],
+    githubUrl: "https://github.com/alsoknownaszac/tendly2",
+    featured: true,
+  },
+  {
+    id: "spendtrails",
+    title: "SpendTrails",
+    tagline: "Personal finance tracking and spending insights",
+    description:
+      "A personal finance tracking application that helps users connect their bank accounts, visualize spending patterns, and gain insights into their financial habits. Built with Next.js and integrated with Plaid for secure banking data.",
+    problem:
+      "People struggle to understand where their money goes. Traditional budgeting apps are either too complex or lack real-time bank integration, making it tedious to track expenses manually.",
+    solution:
+      "Built SpendTrails with Plaid integration to securely connect bank accounts and automatically import transactions. Real-time spending visualizations, category breakdowns, and trend analysis help users make informed financial decisions without manual data entry.",
+    impact: [
+      "Real-time bank account integration via Plaid",
+      "Automated transaction import and categorization",
+      "Visual spending dashboards with trend analysis",
+      "Secure financial data handling",
+    ],
+    role: "Full-Stack Engineer",
+    tech: ["Next.js", "TypeScript", "Plaid API", "Tailwind CSS", "REST APIs"],
+    categories: ["Web App", "Fintech", "Full-Stack"],
+    image: "/portfolio-builder-interface.jpg",
+    gallery: [],
+    liveUrl: "https://www.spendtrails.com",
+    featured: true,
+  },
+];
