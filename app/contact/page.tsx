@@ -109,14 +109,14 @@ export default function ContactPage() {
               <div className="flex items-center justify-center gap-2">
                 <button
                   onClick={handleCopyEmail}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-foreground text-background text-sm font-medium rounded-full hover:bg-foreground/90 transition-all duration-200 active:scale-95"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 bg-foreground text-background text-xs md:text-sm font-medium rounded-full hover:bg-foreground/90 transition-all duration-200 active:scale-95 max-w-full truncate"
                 >
-                  <Mail className="w-4 h-4" />
-                  mayo16collins@gmail.com
+                  <Mail className="w-4 h-4 flex-shrink-0" />
+                  <span className="truncate">mayo16collins@gmail.com</span>
                 </button>
                 <button
                   onClick={handleCopyEmail}
-                  className="p-2.5 rounded-full border border-border hover:border-foreground/20 hover:bg-muted/20 transition-all duration-200 text-muted-foreground hover:text-foreground"
+                  className="p-2.5 rounded-full border border-border hover:border-foreground/20 hover:bg-muted/20 transition-all duration-200 text-muted-foreground hover:text-foreground flex-shrink-0"
                   aria-label="Copy email"
                 >
                   {copiedEmail ? (

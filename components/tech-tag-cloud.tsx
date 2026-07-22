@@ -36,8 +36,8 @@ const positionedSkills = skills.map((skill, i) => {
   const seed = i * 7 + 3;
   return {
     name: skill,
-    left: seededRandom(seed) * 92 + 3,
-    top: seededRandom(seed + 1) * 92 + 3,
+    left: Math.round((seededRandom(seed) * 92 + 3) * 100) / 100,
+    top: Math.round((seededRandom(seed + 1) * 92 + 3) * 100) / 100,
     isLarge: seededRandom(seed + 2) > 0.7,
     isMedium: seededRandom(seed + 2) > 0.4 && seededRandom(seed + 2) <= 0.7,
     opacityHigh: seededRandom(seed + 3) > 0.7,

@@ -148,11 +148,7 @@ export default function ResumePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             ref={resumeRef}
-            className="bg-white text-gray-900 shadow-2xl print:shadow-none"
-            style={{
-              minHeight: "11in",
-              padding: "0.75in 0.75in",
-            }}
+            className="bg-white text-gray-900 shadow-2xl print:shadow-none p-6 md:p-[0.75in]"
           >
             {/* Header Section */}
             <header className="mb-6 pb-6 border-b-2 border-gray-900">

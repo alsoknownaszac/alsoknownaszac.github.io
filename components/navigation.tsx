@@ -59,27 +59,40 @@ export function Navigation() {
 function MobileNav() {
   const pathname = usePathname();
 
-  return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-background/90 backdrop-blur-md">
-      <div className="flex items-center justify-around px-1 py-1.5">
-        {navItems.map((item) => {
-          const isActive =
-            pathname === item.href ||
-            (item.href !== "/" && pathname.startsWith(item.href));
+  const isActive = (href: string) => {
+    const withSlash = href + "/";
+    return (
+      pathname === href ||
+      pathname === withSlash ||
+      (href !== "/" && pathname.startsWith(href))
+    );
+  };
 
-          return (
+  return (
+    <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 border-t border-border/60 bg-background/95 backdrop-blur-md">
+      <div className="flex items-center justify-between px-4 py-2.5">
+        <Link
+          href="/"
+          className="flex-shrink-0 text-xs font-bold tracking-tight text-foreground hover:text-muted-foreground transition-colors"
+        >
+          CA
+        </Link>
+        <div className="flex items-center gap-5">
+          {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                "flex flex-col items-center gap-0 px-2 py-1 text-[10px] font-medium transition-colors duration-150",
-                isActive ? "text-foreground" : "text-muted-foreground",
+                "text-xs font-medium transition-colors duration-150",
+                isActive(item.href)
+                  ? "text-foreground"
+                  : "text-muted-foreground hover:text-foreground",
               )}
             >
-              <span>{item.label}</span>
+              {item.label}
             </Link>
-          );
-        })}
+          ))}
+        </div>
       </div>
     </div>
   );
