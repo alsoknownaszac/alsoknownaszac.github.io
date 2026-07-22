@@ -13,25 +13,79 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Collins Amayo | Software Engineer",
+  metadataBase: new URL("https://alsoknownaszac.github.io"),
+  title: {
+    default: "Collins Amayo — Software Engineer & Full-Stack Developer",
+    template: "%s — Collins Amayo",
+  },
   description:
-    "Software Engineer building production-grade web applications across fintech, SaaS, healthcare, and digital commerce.",
-  icons: {
-    icon: [
+    "Collins Amayo is a software engineer specializing in production-grade web applications across fintech, SaaS, healthcare, and digital commerce. Based in Nigeria, available for remote opportunities.",
+  keywords: [
+    "Collins Amayo",
+    "Software Engineer",
+    "Full-Stack Developer",
+    "Frontend Developer",
+    "Web Developer",
+    "React Developer",
+    "Next.js Developer",
+    "TypeScript",
+    "Fintech Developer",
+    "Nigeria Software Engineer",
+    "Remote Developer",
+    "Zac Amayo",
+    "alsoknownaszac",
+  ],
+  authors: [{ name: "Collins Amayo", url: "https://alsoknownaszac.github.io" }],
+  creator: "Collins Amayo",
+  publisher: "Collins Amayo",
+  alternates: {
+    canonical: "https://alsoknownaszac.github.io",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "Collins Amayo — Portfolio",
+    url: "https://alsoknownaszac.github.io",
+    title: "Collins Amayo — Software Engineer & Full-Stack Developer",
+    description:
+      "Collins Amayo is a software engineer building production-grade web applications across fintech, SaaS, healthcare, and digital commerce. Based in Nigeria, open to remote opportunities.",
+    images: [
       {
-        url: "/icon-light-32x32.png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/icon-dark-32x32.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/icon.svg",
-        type: "image/svg+xml",
+        url: "/apple-icon.png",
+        width: 180,
+        height: 180,
+        alt: "Collins Amayo — CA Logo",
       },
     ],
-    apple: "/apple-icon.png",
+  },
+  twitter: {
+    card: "summary",
+    site: "@alsoknownaszac",
+    creator: "@alsoknownaszac",
+    title: "Collins Amayo — Software Engineer & Full-Stack Developer",
+    description:
+      "Software engineer building production-grade web applications across fintech, SaaS, healthcare, and digital commerce.",
+    images: ["/apple-icon.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/icon-dark-32x32.png", type: "image/png", sizes: "32x32" },
+      { url: "/icon-light-32x32.png", type: "image/png", sizes: "32x32" },
+    ],
+    shortcut: "/icon.svg",
+    apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "180x180" }],
   },
 };
 
