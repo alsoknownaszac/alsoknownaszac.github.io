@@ -112,13 +112,6 @@ const resumeData = {
       },
     ],
   },
-  education: [
-    {
-      degree: "Associate Degree in Petroleum and Gas Processing Engineering",
-      school: "Petroleum Training Institute, Warri, NG",
-      period: "Nov 2014 – Aug 2016",
-    },
-  ],
 };
 
 export default function ResumePage() {
@@ -226,30 +219,6 @@ export default function ResumePage() {
                         </li>
                       ))}
                     </ul>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            {/* Education */}
-            <section className="mb-6">
-              <h2 className="text-xl font-bold mb-3 text-gray-900 uppercase tracking-wide border-b border-gray-300 pb-1">
-                Education
-              </h2>
-              <div className="space-y-2">
-                {resumeData.education.map((edu, index) => (
-                  <div key={index}>
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <h3 className="text-base font-bold text-gray-900">
-                          {edu.school}
-                        </h3>
-                        <p className="text-sm text-gray-700">{edu.degree}</p>
-                      </div>
-                      <p className="text-sm text-gray-600 italic whitespace-nowrap ml-4">
-                        {edu.period}
-                      </p>
-                    </div>
                   </div>
                 ))}
               </div>
