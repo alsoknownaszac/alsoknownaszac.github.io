@@ -1,10 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
 import { PageWrapper } from "@/components/page-wrapper";
 import { SectionHeader } from "@/components/section-header";
-import { Briefcase, ArrowRight, ExternalLink, Github } from "lucide-react";
+import { Briefcase, ExternalLink, Github } from "lucide-react";
 import { projects } from "@/lib/projects-data";
 
 export default function ProjectsPage() {
@@ -41,14 +40,19 @@ export default function ProjectsPage() {
                   </div>
 
                   {/* Title + tagline */}
-                  <Link href={`/projects/${project.id}/`} className="block">
+                  <a
+                    href={project.liveUrl || project.githubUrl || `/projects/${project.id}/`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block"
+                  >
                     <h3 className="text-xl md:text-2xl font-semibold tracking-tight text-foreground group-hover:text-muted-foreground transition-colors mb-2 leading-tight">
                       {project.title}
                     </h3>
                     <p className="text-sm text-muted-foreground leading-relaxed mb-4 max-w-xl">
                       {project.tagline}
                     </p>
-                  </Link>
+                  </a>
 
                   {/* Description */}
                   <p className="text-sm text-muted-foreground/70 leading-relaxed mb-5 line-clamp-3 max-w-xl">
@@ -74,13 +78,6 @@ export default function ProjectsPage() {
 
                   {/* Links */}
                   <div className="flex flex-wrap items-center gap-4">
-                    <Link
-                      href={`/projects/${project.id}/`}
-                      className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-muted-foreground transition-colors"
-                    >
-                      Case study
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
                     {project.liveUrl && (
                       <a
                         href={project.liveUrl}
